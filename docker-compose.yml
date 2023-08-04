@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - parking-finder-network
+
+  db:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=postgres
+    networks:
+      - parking-finder-network
+
+networks:
+  parking-finder-network:
+    driver: bridge
